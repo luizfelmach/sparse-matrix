@@ -10,7 +10,7 @@
 
 
 PROJECT    =     sparse_matrix
-TARGETS    =     scripts/gen_matrix.c
+TARGETS    =     main.c
 FILES      =     ./*.c
 IMPORTS    =     matrix
 LINKER     =     m
