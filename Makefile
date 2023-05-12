@@ -12,7 +12,7 @@
 PROJECT    =     sparse_matrix
 TARGETS    =     main.c
 FILES      =     ./*.c
-IMPORTS    =     sparse_matrix
+IMPORTS    =     matrix
 LINKER     =     m
 
 # Folders
