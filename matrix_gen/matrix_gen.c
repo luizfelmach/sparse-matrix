@@ -15,8 +15,8 @@ Matrix matrix_gen(int row, int column) {
     int i, j;
     for (i = 0; i < row; i++) {
         for (j = 0; j < column; j++) {
-            if (((unsigned int)(drand48() * 10)) < 3) {
-                matrix_set(m, (double)(drand48() * 10), i, j);
+            if (((unsigned int)(drand48() * 10)) < 10) {
+                matrix_set(m, (unsigned int)(drand48() * 10), i, j);
             }
         }
     }

@@ -147,14 +147,25 @@ Matrix matrix_sum(Matrix m1, Matrix m2) {
     for (i = 0; i < m1->r; i++) {
         Node node1 = m1->rows[i];
         Node node2 = m2->rows[i];
-        while (node1 && node2) {
-            if (node1->column > node2->column) {
-                node2 = node2->next;
-            } else if (node2->column > node1->column) {
+        while (node1 || node2) {
+            if (node1 && node2) {
+                if (node1->column > node2->column) {
+                    matrix_set(new, node2->value, node2->row, node2->column);
+                    node2 = node2->next;
+                } else if (node2->column > node1->column) {
+                    matrix_set(new, node1->value, node1->row, node1->column);
+                    node1 = node1->next;
+                } else {
+                    matrix_set(new, node1->value + node2->value, node1->row,
+                               node2->column);
+                    node1 = node1->next;
+                    node2 = node2->next;
+                }
+            } else if (node1 != NULL) {
+                matrix_set(new, node1->value, node1->row, node1->column);
                 node1 = node1->next;
-            } else {
-                matrix_set(new, node1->value + node2->value, node1->row, node2->column);
-                node1 = node1->next;
+            } else if (node2 != NULL) {
+                matrix_set(new, node2->value, node2->row, node2->column);
                 node2 = node2->next;
             }
         }
