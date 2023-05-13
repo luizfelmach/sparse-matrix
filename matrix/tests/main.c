@@ -1,30 +1,27 @@
 #include <sparse_matrix.h>
 #include <stdio.h>
 
-int main() {
-    Matrix sm1 = matrix(3, 3);
-    Matrix sm2 = matrix(3, 3);
+Matrix matrix_read() {
+    int row, column;
+    scanf("%d %d%*c", &row, &column);
+
+    Matrix m = matrix(row, column);
 
     int i, j;
-    for (i = 0; i < 3; i++)
-        for (j = 0; j < 3; j++) {
+    for (i = 0; i < row; i++) {
+        for (j = 0; j < column; j++) {
             int a;
-            scanf("%d", &a);
-            matrix_set(sm1, a, i, j);
+            scanf("%d%*c", &a);
+            matrix_set(m, a, i, j);
         }
+    }
 
-    for (i = 0; i < 3; i++)
-        for (j = 0; j < 3; j++) {
-            int a;
-            scanf("%d", &a);
-            matrix_set(sm2, a, i, j);
-        }
+    return m;
+}
 
-    matrix_show_dense(sm1);
-    printf("\n\n");
-    matrix_show_dense(sm2);
-    printf("\n\n");
-    matrix_show_dense(matrix_swap_column(sm1, 0, 1));
+int main() {
+    Matrix m = matrix_read();
 
+    matrix_destroy(m);
     return 0;
 }

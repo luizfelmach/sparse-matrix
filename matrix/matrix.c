@@ -324,7 +324,7 @@ void matrix_show_dense(Matrix m) {
     int i, j;
     for (i = 0; i < m->r; i++) {
         for (j = 0; j < m->c; j++) {
-            printf("%.0lf ", matrix_get(m, i, j));
+            printf("%3.0lf ", matrix_get(m, i, j));
         }
         printf("\n");
     }
