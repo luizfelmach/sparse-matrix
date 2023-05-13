@@ -10,10 +10,10 @@ Matrix matrix(int row, int column);
 void   matrix_set(Matrix m, double data, int row, int column);
 double matrix_get(Matrix m, int row, int column);
 
-Matrix matrix_sum(Matrix sm1, Matrix sm2);
+Matrix matrix_sum(Matrix m1, Matrix m2);
 Matrix matrix_mult_k(Matrix m, double k);
-Matrix matrix_mult(Matrix sm1, Matrix sm2);
-Matrix matrix_mult_point(Matrix sm1, Matrix sm2);
+Matrix matrix_mult(Matrix m1, Matrix m2);
+Matrix matrix_mult_point(Matrix m1, Matrix m2);
 
 Matrix matrix_swap_row(Matrix m, int r1, int r2);
 Matrix matrix_swap_column(Matrix m, int c1, int c2);
