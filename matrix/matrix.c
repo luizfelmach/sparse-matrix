@@ -372,6 +372,22 @@ Matrix matrix_copy_except(Matrix m, int row, int column) {
     return new;
 }
 
+Matrix matrix_cof(Matrix m) {
+    Matrix new = matrix(m->r, m->c);
+
+    int i, j;
+    for (i = 0; i < m->r; i++) {
+        for (j = 0; j < m->c; j++) {
+            Matrix d = matrix_copy_except(m, i, j);
+            double c = pow(-1, i + j) * matrix_det(d);
+            matrix_set(new, c, i, j);
+            matrix_destroy(d);
+        }
+    }
+
+    return new;
+}
+
 double matrix_det(Matrix m) {
     if (m->r != m->c) {
         printf("error: matrix incompatible.\n");
