@@ -23,3 +23,18 @@ Matrix matrix_gen(int row, int column) {
 
     return m;
 }
+
+Matrix matrix_id(int size) {
+    Matrix m = matrix(size, size);
+
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    srand48(tv.tv_usec);
+
+    int i, j;
+    for (i = 0; i < size; i++) {
+        matrix_set(m, 1, i, i);
+    }
+
+    return m;
+}

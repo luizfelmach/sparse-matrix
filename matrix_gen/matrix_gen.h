@@ -4,5 +4,6 @@
 #include <matrix.h>
 
 Matrix matrix_gen(int row, int column);
+Matrix matrix_id(int size);
 
 #endif
