@@ -297,6 +297,18 @@ Matrix matrix_swap_column(Matrix m, int c1, int c2) {
 }
 
 Matrix matrix_slice(Matrix m, int r1, int c1, int r2, int c2) {
+    if (r1 < 0 || r2 < 0 || r1 >= m->r || r2 >= m->r) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
+    if (c1 < 0 || c2 < 0 || c1 >= m->r || c2 >= m->r) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
+    if (r1 > r2 || c1 > c2) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
     Matrix new = matrix(r2 - r1 + 1, c2 - c1 + 1);
 
     int i;
