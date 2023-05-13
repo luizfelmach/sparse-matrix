@@ -388,6 +388,13 @@ Matrix matrix_cof(Matrix m) {
     return new;
 }
 
+Matrix matrix_adj(Matrix m) {
+    Matrix cof = matrix_cof(m);
+    Matrix adj = matrix_transposed(cof);
+    matrix_destroy(cof);
+    return adj;
+}
+
 double matrix_det(Matrix m) {
     if (m->r != m->c) {
         printf("error: matrix incompatible.\n");
@@ -411,6 +418,21 @@ double matrix_det(Matrix m) {
     return result;
 }
 
+Matrix matrix_inv(Matrix m) {
+    double det = matrix_det(m);
+
+    if (det == 0) {
+        printf("error: matrix is not invertible.\n");
+        exit(1);
+    }
+
+    Matrix adj = matrix_adj(m);
+    Matrix inv = matrix_mult_k(adj, 1 / det);
+    matrix_destroy(adj);
+
+    return inv;
+}
+
 void matrix_show(Matrix m) {
     int i;
     for (i = 0; i < m->r; i++) {
@@ -427,7 +449,7 @@ void matrix_show_dense(Matrix m) {
     int i, j;
     for (i = 0; i < m->r; i++) {
         for (j = 0; j < m->c; j++) {
-            printf("%3.0lf ", matrix_get(m, i, j));
+            printf("%3.1lf ", matrix_get(m, i, j));
         }
         printf("\n");
     }

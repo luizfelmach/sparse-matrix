@@ -21,7 +21,9 @@ Matrix matrix_slice(Matrix m, int r1, int c1, int r2, int c2);
 Matrix matrix_transposed(Matrix m);
 
 Matrix matrix_cof(Matrix m);
+Matrix matrix_adj(Matrix m);
 double matrix_det(Matrix m);
+Matrix matrix_inv(Matrix m);
 
 void   matrix_show(Matrix m);
 void   matrix_show_dense(Matrix m);
