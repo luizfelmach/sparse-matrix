@@ -246,6 +246,11 @@ Matrix matrix_mult_point(Matrix m1, Matrix m2) {
 }
 
 Matrix matrix_swap_row(Matrix m, int r1, int r2) {
+    if (r1 < 0 || r2 < 0 || r1 >= m->r || r2 >= m->r) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
+
     Matrix new = matrix(m->r, m->c);
 
     int i;
@@ -267,6 +272,10 @@ Matrix matrix_swap_row(Matrix m, int r1, int r2) {
 }
 
 Matrix matrix_swap_column(Matrix m, int c1, int c2) {
+    if (c1 < 0 || c2 < 0 || c1 >= m->r || c2 >= m->r) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
     Matrix new = matrix(m->r, m->c);
 
     int i;
