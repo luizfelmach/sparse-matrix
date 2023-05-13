@@ -20,6 +20,8 @@ Matrix matrix_swap_column(Matrix m, int c1, int c2);
 Matrix matrix_slice(Matrix m, int r1, int c1, int r2, int c2);
 Matrix matrix_transposed(Matrix m);
 
+double matrix_det(Matrix m);
+
 void   matrix_show(Matrix m);
 void   matrix_show_dense(Matrix m);
 void   matrix_save(Matrix m, FILE* file);

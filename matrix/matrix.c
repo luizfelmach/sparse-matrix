@@ -1,3 +1,4 @@
+#include <math.h>
 #include <matrix.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -338,6 +339,60 @@ Matrix matrix_transposed(Matrix m) {
     }
 
     return new;
+}
+
+Matrix matrix_copy_except(Matrix m, int row, int column) {
+    if (row < 0 || column < 0 || row >= m->r || column >= m->c) {
+        printf("error: incorrect index.\n");
+        exit(1);
+    }
+    Matrix new = matrix(m->r - 1, m->c - 1);
+
+    int i;
+    for (i = 0; i < m->r; i++) {
+        Node node = m->rows[i];
+        while (node) {
+            if (i > row) {
+                if (node->column > column) {
+                    matrix_set(new, node->value, i - 1, node->column - 1);
+                } else if (node->column < column) {
+                    matrix_set(new, node->value, i - 1, node->column);
+                }
+            } else if (i < row) {
+                if (node->column > column) {
+                    matrix_set(new, node->value, i, node->column - 1);
+                } else if (node->column < column) {
+                    matrix_set(new, node->value, i, node->column);
+                }
+            }
+            node = node->next;
+        }
+    }
+
+    return new;
+}
+
+double matrix_det(Matrix m) {
+    if (m->r != m->c) {
+        printf("error: matrix incompatible.\n");
+        exit(1);
+    }
+    if (m->r == 1) {
+        return matrix_get(m, 0, 0);
+    }
+
+    Node node = m->rows[0];
+
+    double result = 0;
+
+    while (node) {
+        Matrix c = matrix_copy_except(m, node->row, node->column);
+        result += node->value * pow(-1, node->row + node->column) * matrix_det(c);
+        matrix_destroy(c);
+        node = node->next;
+    }
+
+    return result;
 }
 
 void matrix_show(Matrix m) {
