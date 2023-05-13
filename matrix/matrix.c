@@ -175,7 +175,7 @@ Matrix matrix_sum(Matrix m1, Matrix m2) {
 }
 
 Matrix matrix_mult_k(Matrix m, double k) {
-    Matrix new = matrix(m->r, m->r);
+    Matrix new = matrix(m->r, m->c);
 
     int i;
     for (i = 0; i < m->r; i++) {
