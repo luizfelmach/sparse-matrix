@@ -24,6 +24,7 @@ Matrix matrix_cof(Matrix m);
 Matrix matrix_adj(Matrix m);
 double matrix_det(Matrix m);
 Matrix matrix_inv(Matrix m);
+Matrix matrix_solve(Matrix A, Matrix B);
 
 void   matrix_show(Matrix m);
 void   matrix_show_dense(Matrix m);

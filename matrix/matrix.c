@@ -433,6 +433,13 @@ Matrix matrix_inv(Matrix m) {
     return inv;
 }
 
+Matrix matrix_solve(Matrix A, Matrix B) {
+    Matrix inv = matrix_inv(A);
+    Matrix x = matrix_mult(inv, B); 
+    matrix_destroy(inv);
+    return x;
+}
+
 void matrix_show(Matrix m) {
     int i;
     for (i = 0; i < m->r; i++) {
