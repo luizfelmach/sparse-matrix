@@ -341,6 +341,73 @@ Matrix matrix_transposed(Matrix m) {
     return new;
 }
 
+Matrix _matrix_slice_for_kernel(Matrix m, int r, int c, int kernel_size) {
+    Matrix new = matrix(kernel_size, kernel_size);
+
+
+    int r1 = r - kernel_size/2;
+    int r2 = r + kernel_size/2;
+
+    int c1 = c - kernel_size/2;
+    int c2 = c + kernel_size/2;
+
+    int linha = 0, coluna = 0;
+
+    int i;
+    for (i = r1, linha = 0; i <= r2; i++, linha++) {
+        if (i < 0 || i >= m->r) {
+            continue;
+        }
+
+        Node node = m->rows[i];
+        coluna = 0;
+        while (node) {
+            if (node->column >= c1 && node->column <= c2) {
+                matrix_set(new, node->value, linha, abs(node->column - c + 1));
+                coluna += 1;
+            }
+            node = node->next;
+        }
+    }
+
+    return new; 
+}
+
+double matrix_sum_values(Matrix m) {
+    double result = 0;
+
+    int i;
+    for (i = 0; i < m->r; i++) {
+        Node node = m->rows[i];
+        while (node) {
+            result += node->value;
+            node = node->next;
+        }
+    }
+
+    return result;
+}
+
+Matrix matrix_convolution(Matrix m, Matrix kernel) {
+    Matrix new = matrix(m->r, m->c);
+
+    int i, j;
+    for (i = 0; i < m->r; i++) {
+        for (j = 0; j < m->c; j++) {
+            Matrix c = _matrix_slice_for_kernel(m, i, j, kernel->c);
+
+            Matrix mult = matrix_mult_point(c, kernel);
+
+            matrix_set(new, matrix_sum_values(mult), i, j);
+
+            matrix_destroy(c);
+            matrix_destroy(mult);
+        }
+    }
+
+    return new;
+}
+
 Matrix matrix_copy_except(Matrix m, int row, int column) {
     if (row < 0 || column < 0 || row >= m->r || column >= m->c) {
         printf("error: incorrect index.\n");

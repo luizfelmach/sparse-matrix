@@ -19,6 +19,7 @@ Matrix matrix_swap_row(Matrix m, int r1, int r2);
 Matrix matrix_swap_column(Matrix m, int c1, int c2);
 Matrix matrix_slice(Matrix m, int r1, int c1, int r2, int c2);
 Matrix matrix_transposed(Matrix m);
+Matrix matrix_convolution(Matrix m, Matrix kernel);
 
 Matrix matrix_cof(Matrix m);
 Matrix matrix_adj(Matrix m);
