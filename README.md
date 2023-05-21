@@ -1,2 +1,8 @@
 # sparse-matrix
-Sparse Matrix
+
+## Compile
+
+```bash
+$ make
+```
+
