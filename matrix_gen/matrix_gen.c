@@ -27,7 +27,7 @@ Matrix matrix_gen(int row, int column) {
 Matrix matrix_id(int size) {
     Matrix m = matrix(size, size);
 
-    int i, j;
+    int i;
     for (i = 0; i < size; i++) {
         matrix_set(m, 1, i, i);
     }
